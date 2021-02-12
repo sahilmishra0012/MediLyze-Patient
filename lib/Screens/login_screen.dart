@@ -1,4 +1,4 @@
-import 'package:MedilyzePatient/Screens/home_screen.dart';
+import 'package:MedilyzePatient/Screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:MedilyzePatient/widgets/constants.dart';
 import 'package:flutter_svg/svg.dart';
@@ -186,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    HomeScreen()));
+                                                    Profile()));
                                       }
                                     },
                                   );

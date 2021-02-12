@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:MedilyzePatient/Screens/home_screen.dart';
+import 'package:MedilyzePatient/Screens/profile.dart';
 
 class HomeSplashScreen extends StatefulWidget {
   @override
@@ -35,7 +35,7 @@ class _SplashScreenState extends State<HomeSplashScreen>
   route() {
     Navigator.pop(context);
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        context, MaterialPageRoute(builder: (context) => Profile()));
   }
 
   @override
