@@ -1,9 +1,9 @@
-import 'package:MedilyzePatient/Screens/profile.dart';
+import 'profile.dart';
 import 'package:flutter/material.dart';
-import 'package:MedilyzePatient/widgets/constants.dart';
+import '../widgets/constants.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:MedilyzePatient/services/auth_service.dart';
+import '../services/auth_service.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {

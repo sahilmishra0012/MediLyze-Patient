@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:MedilyzePatient/utils/const.dart';
-import 'package:MedilyzePatient/services/auth_service.dart';
+import '../utils/const.dart';
+import '../services/auth_service.dart';
 import 'package:provider/provider.dart';
-import 'package:MedilyzePatient/Screens/login_screen.dart';
+import 'login_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override

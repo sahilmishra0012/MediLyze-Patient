@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:MedilyzePatient/Screens/profile.dart';
+import 'profile.dart';
 
 class HomeSplashScreen extends StatefulWidget {
   @override

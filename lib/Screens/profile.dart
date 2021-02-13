@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:MedilyzePatient/constants/Theme.dart';
+import '../constants/Theme.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 //widgets
@@ -195,7 +195,7 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 );}
                                 catch(e){
-                                  return Container(child: Text(""),);
+                                  return Container();
                                 }
                                 
                               },

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:MedilyzePatient/constants/Theme.dart';
+import '../constants/Theme.dart';
 
-import 'package:MedilyzePatient/widgets/drawer-tile.dart';
+import 'drawer-tile.dart';
 
 class ArgonDrawer extends StatelessWidget {
   final String currentPage;

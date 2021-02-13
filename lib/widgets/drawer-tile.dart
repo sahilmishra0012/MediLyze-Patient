@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:MedilyzePatient/constants/Theme.dart';
+import '../constants/Theme.dart';
 
 class DrawerTile extends StatelessWidget {
   final String title;
