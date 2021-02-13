@@ -1,15 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../utils/const.dart';
-import '../services/auth_service.dart';
+import '../services/auth_services/auth_service.dart';
 import 'package:provider/provider.dart';
-import 'login_screen.dart';
+import '../Screens/login_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Constants.backgroundColor,
+      backgroundColor: Colors.white,
       body: Container(
         child: Center(
           child: Column(

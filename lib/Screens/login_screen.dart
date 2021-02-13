@@ -1,9 +1,9 @@
-import 'profile.dart';
+import 'profile_screen.dart';
 import 'package:flutter/material.dart';
 import '../constants/constants.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:email_validator/email_validator.dart';
-import '../services/auth_service.dart';
+import '../services/auth_services/auth_service.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
