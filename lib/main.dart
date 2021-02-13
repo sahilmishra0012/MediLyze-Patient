@@ -1,5 +1,5 @@
-import 'Screens/home_screen.dart';
 import 'Screens/home_splash_screen.dart';
+import 'services/data_services/notifiers/home_data.dart';
 import 'Screens/login_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           create: (context) =>
               context.read<AuthenticationService>().authStateChanges,
         ),
-        // ChangeNotifierProvider<HomeScreen>(create: (_) => HomeScreen()),
+        ChangeNotifierProvider<LoadHomeData>(create: (_) => LoadHomeData()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
