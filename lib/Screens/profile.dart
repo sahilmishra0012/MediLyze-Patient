@@ -178,26 +178,26 @@ class _ProfileState extends State<Profile> {
                             itemExtent: 100.0,
                             delegate: SliverChildBuilderDelegate(
                               (BuildContext context, int index) {
-                                try{return Container(
-                                  alignment: Alignment.center,
-                                  child: Card(
-                                    child: GestureDetector(
-                                      child: Container(
-                                        child: Text(data[index]),
-                                        height: 220,
-                                        width: double.maxFinite,
+                                try {
+                                  return Container(
+                                    alignment: Alignment.center,
+                                    child: Card(
+                                      child: GestureDetector(
+                                        child: Container(
+                                          child: Text(data[index]),
+                                          height: 220,
+                                          width: double.maxFinite,
+                                        ),
+                                        onTap: () {
+                                          print(index);
+                                        },
                                       ),
-                                      onTap: () {
-                                        print(index);
-                                      },
+                                      elevation: 5,
                                     ),
-                                    elevation: 5,
-                                  ),
-                                );}
-                                catch(e){
+                                  );
+                                } catch (e) {
                                   return Container();
                                 }
-                                
                               },
                               childCount: 13,
                             ),

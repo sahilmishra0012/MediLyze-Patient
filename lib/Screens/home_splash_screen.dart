@@ -34,8 +34,7 @@ class _SplashScreenState extends State<HomeSplashScreen>
 
   route() {
     Navigator.pop(context);
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => Profile()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
   }
 
   @override
