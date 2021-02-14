@@ -1,4 +1,4 @@
-import 'profile_screen.dart';
+import 'home_screen.dart';
 import 'package:flutter/material.dart';
 import '../constants/constants.dart';
 import 'package:flutter_svg/svg.dart';

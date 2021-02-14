@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:provider/provider.dart';
+import '../Screens/login_screen.dart';
+import 'dart:async';
+import '../services/auth_services/auth_service.dart';
 
 import '../constants/Theme.dart';
 
@@ -35,7 +39,7 @@ class ArgonDrawer extends StatelessWidget {
                     alignment: Alignment.bottomLeft,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 32),
-                      child: Image.asset("assets/img/argon-logo.png"),
+                      child: Image.asset("assets/images/argon-logo.png"),
                     ),
                   ),
                 )),
@@ -56,38 +60,49 @@ class ArgonDrawer extends StatelessWidget {
                   DrawerTile(
                       icon: Icons.pie_chart,
                       onTap: () {
-                        if (currentPage != "Profile")
-                          Navigator.pushReplacementNamed(context, '/profile');
+                        if (currentPage != "Edit Profile")
+                          Navigator.pushReplacementNamed(
+                              context, '/edit_profile');
                       },
                       iconColor: ArgonColors.warning,
-                      title: "Profile",
-                      isSelected: currentPage == "Profile" ? true : false),
+                      title: "Edit Profile",
+                      isSelected: currentPage == "Edit Profile" ? true : false),
                   DrawerTile(
-                      icon: Icons.account_circle,
+                      icon: Icons.meeting_room,
                       onTap: () {
-                        if (currentPage != "Account")
-                          Navigator.pushReplacementNamed(context, '/account');
+                        if (currentPage != "Appointments")
+                          Navigator.pushReplacementNamed(
+                              context, '/appointments');
                       },
                       iconColor: ArgonColors.info,
-                      title: "Account",
-                      isSelected: currentPage == "Account" ? true : false),
+                      title: "Appointments",
+                      isSelected: currentPage == "Appointments" ? true : false),
                   DrawerTile(
-                      icon: Icons.settings_input_component,
+                      icon: Icons.local_hospital,
                       onTap: () {
-                        if (currentPage != "Elements")
-                          Navigator.pushReplacementNamed(context, '/elements');
+                        if (currentPage != "Medications")
+                          Navigator.pushReplacementNamed(
+                              context, '/Medications');
+                      },
+                      iconColor: ArgonColors.info,
+                      title: "Medications",
+                      isSelected: currentPage == "Medications" ? true : false),
+                  DrawerTile(
+                      icon: Icons.note,
+                      onTap: () {
+                        if (currentPage != "Prescriptions")
+                          Navigator.pushReplacementNamed(
+                              context, '/prescriptions');
                       },
                       iconColor: ArgonColors.error,
-                      title: "Elements",
-                      isSelected: currentPage == "Elements" ? true : false),
+                      title: "Prescriptions",
+                      isSelected:
+                          currentPage == "Prescriptions" ? true : false),
                   DrawerTile(
-                      icon: Icons.apps,
-                      onTap: () {
-                        if (currentPage != "Articles")
-                          Navigator.pushReplacementNamed(context, '/articles');
-                      },
+                      icon: Icons.paste,
+                      onTap: () {},
                       iconColor: ArgonColors.primary,
-                      title: "Articles",
+                      title: "Pathology Reports",
                       isSelected: currentPage == "Articles" ? true : false),
                 ],
               ),
@@ -101,22 +116,20 @@ class ArgonDrawer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Divider(height: 4, thickness: 0, color: ArgonColors.muted),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 16.0, left: 16, bottom: 8),
-                      child: Text("DOCUMENTATION",
-                          style: TextStyle(
-                            color: Color.fromRGBO(0, 0, 0, 0.5),
-                            fontSize: 15,
-                          )),
-                    ),
                     DrawerTile(
-                        icon: Icons.airplanemode_active,
-                        onTap: _launchURL,
+                        icon: Icons.logout,
+                        onTap: () {
+                          context.read<AuthenticationService>().signOut();
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginScreen()));
+                        },
                         iconColor: ArgonColors.muted,
-                        title: "Getting Started",
-                        isSelected:
-                            currentPage == "Getting started" ? true : false),
+                        title: "Log Out",
+                        isSelected: currentPage == "Log Out" ? true : false),
                   ],
                 ),
               ),

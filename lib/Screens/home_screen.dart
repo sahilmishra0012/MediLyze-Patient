@@ -4,7 +4,7 @@ import '../constants/Theme.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import '../services/data_services/notifiers/home_data.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import '../services/data_services/notifiers/appointment_data.dart';
 import 'package:shimmer/shimmer.dart';
 
 //widgets
@@ -20,14 +20,16 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     Provider.of<LoadHomeData>(context).loadHomeData();
+    Provider.of<LoadAppointmentData>(context).loadAppointments();
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: Navbar(
-        title: "Profile",
+        title: "Home",
         transparent: true,
       ),
       backgroundColor: ArgonColors.bgColorScreen,
-      drawer: ArgonDrawer(currentPage: "Profile"),
+      drawer: ArgonDrawer(currentPage: "Home"),
       body: Stack(
         children: <Widget>[
           Container(
@@ -38,7 +40,8 @@ class _ProfileState extends State<Profile> {
                   fit: BoxFit.fitWidth),
             ),
           ),
-          Provider.of<LoadHomeData>(context).data != null
+          Provider.of<LoadHomeData>(context).data != null &&
+                  Provider.of<LoadAppointmentData>(context).appointments != null
               ? Container(
                   child: ListView(children: [
                     Padding(
@@ -173,12 +176,6 @@ class _ProfileState extends State<Profile> {
                                                   ),
                                                 ],
                                               ),
-                                              Divider(
-                                                height: 40.0,
-                                                thickness: 1.5,
-                                                indent: 32.0,
-                                                endIndent: 32.0,
-                                              ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
                                                     left: 32.0, right: 32.0),
@@ -199,7 +196,7 @@ class _ProfileState extends State<Profile> {
                                     backgroundImage: NetworkImage(
                                         Provider.of<LoadHomeData>(context)
                                             .data['photo']),
-                                    radius: 65.0,
+                                    radius: 70.0,
                                     // maxRadius: 200.0,
                                   ),
                                   alignment: FractionalOffset(0.5, 0.0),
@@ -228,7 +225,13 @@ class _ProfileState extends State<Profile> {
                                           child: Card(
                                             child: GestureDetector(
                                               child: Container(
-                                                child: Text(index.toString()),
+                                                child: Text(Provider.of<
+                                                            LoadAppointmentData>(
+                                                        context)
+                                                    .appointments[index]
+                                                    .values
+                                                    .elementAt(
+                                                        0)[0]['prescription_id']),
                                                 height: 220,
                                                 width: double.maxFinite,
                                               ),
@@ -243,7 +246,11 @@ class _ProfileState extends State<Profile> {
                                         return Container();
                                       }
                                     },
-                                    childCount: 13,
+                                    childCount:
+                                        Provider.of<LoadAppointmentData>(
+                                                context)
+                                            .appointments
+                                            .length,
                                   ),
                                 ),
                               ],
@@ -287,86 +294,93 @@ class _ProfileState extends State<Profile> {
                                     ),
                                   ],
                                 ),
-                                child: Card(
-                                  semanticContainer: true,
-                                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  elevation: 1.0,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(5.0))),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 85.0, bottom: 20.0),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Column(
-                                            children: [
-                                              Align(
-                                                child: Text("",
-                                                    style: TextStyle(
-                                                        color: Color.fromRGBO(
-                                                            50, 50, 93, 1),
-                                                        fontSize: 28.0)),
-                                              ),
-                                              SizedBox(height: 10.0),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  SizedBox(width: 10.0),
-                                                  Text(
-                                                    "",
-                                                    style: TextStyle(
-                                                        color: Color.fromRGBO(
-                                                            50, 50, 93, 1),
-                                                        fontSize: 18.0,
-                                                        fontWeight:
-                                                            FontWeight.w200),
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  SizedBox(width: 10.0),
-                                                  Text(
-                                                    "",
-                                                    style: TextStyle(
-                                                        color: Color.fromRGBO(
-                                                            50, 50, 93, 1),
-                                                        fontSize: 18.0,
-                                                        fontWeight:
-                                                            FontWeight.w200),
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  SizedBox(width: 10.0),
-                                                  Text(
-                                                    "",
-                                                    style: TextStyle(
-                                                        color: Color.fromRGBO(
-                                                            50, 50, 93, 1),
-                                                        fontSize: 18.0,
-                                                        fontWeight:
-                                                            FontWeight.w200),
-                                                  ),
-                                                ],
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 32.0, right: 32.0),
-                                              ),
-                                              SizedBox(height: 30.0),
-                                            ],
+                                child: Shimmer.fromColors(
+                                  // Wrap your widget into Shimmer.
+                                  baseColor: Colors.grey[100],
+                                  highlightColor: Colors.grey[200],
+                                  child: Card(
+                                    semanticContainer: true,
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    elevation: 1.0,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5.0))),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 85.0, bottom: 20.0),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              children: [
+                                                Align(
+                                                  child: Text("",
+                                                      style: TextStyle(
+                                                          color: Color.fromRGBO(
+                                                              50, 50, 93, 1),
+                                                          fontSize: 28.0)),
+                                                ),
+                                                SizedBox(height: 10.0),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    SizedBox(width: 10.0),
+                                                    Text(
+                                                      "",
+                                                      style: TextStyle(
+                                                          color: Color.fromRGBO(
+                                                              50, 50, 93, 1),
+                                                          fontSize: 18.0,
+                                                          fontWeight:
+                                                              FontWeight.w200),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    SizedBox(width: 10.0),
+                                                    Text(
+                                                      "",
+                                                      style: TextStyle(
+                                                          color: Color.fromRGBO(
+                                                              50, 50, 93, 1),
+                                                          fontSize: 18.0,
+                                                          fontWeight:
+                                                              FontWeight.w200),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    SizedBox(width: 10.0),
+                                                    Text(
+                                                      "",
+                                                      style: TextStyle(
+                                                          color: Color.fromRGBO(
+                                                              50, 50, 93, 1),
+                                                          fontSize: 18.0,
+                                                          fontWeight:
+                                                              FontWeight.w200),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 32.0,
+                                                          right: 32.0),
+                                                ),
+                                                SizedBox(height: 30.0),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -374,11 +388,16 @@ class _ProfileState extends State<Profile> {
                               FractionalTranslation(
                                 translation: Offset(0.0, -0.5),
                                 child: Align(
-                                  child: CircleAvatar(
-                                    backgroundImage: AssetImage(
-                                        'assets/images/profile-screen-avatar.png'),
-                                    radius: 65.0,
-                                    // maxRadius: 200.0,
+                                  child: Shimmer.fromColors(
+                                    // Wrap your widget into Shimmer.
+                                    baseColor: Colors.grey[200],
+                                    highlightColor: Colors.grey[350],
+                                    child: CircleAvatar(
+                                      backgroundImage: AssetImage(
+                                          'assets/images/profile-screen-avatar.png'),
+                                      radius: 70.0,
+                                      // maxRadius: 200.0,
+                                    ),
                                   ),
                                   alignment: FractionalOffset(0.5, 0.0),
                                 ),
@@ -386,6 +405,53 @@ class _ProfileState extends State<Profile> {
                             ],
                           ),
                           SizedBox(height: 15.0),
+                          Align(
+                            child: Text("Recent Appointments",
+                                style: TextStyle(
+                                    color: Color.fromRGBO(50, 50, 93, 1),
+                                    fontSize: 28.0)),
+                          ),
+                          SizedBox(height: 15.0),
+                          Container(
+                            child: CustomScrollView(
+                              slivers: <Widget>[
+                                SliverFixedExtentList(
+                                  itemExtent: 100.0,
+                                  delegate: SliverChildBuilderDelegate(
+                                    (BuildContext context, int index) {
+                                      try {
+                                        return Shimmer.fromColors(
+                                          baseColor: Colors.grey[100],
+                                          highlightColor: Colors.grey[200],
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            child: Card(
+                                              child: GestureDetector(
+                                                child: Container(
+                                                  child: Text(index.toString()),
+                                                  height: 220,
+                                                  width: double.maxFinite,
+                                                ),
+                                                onTap: () {
+                                                  print(index);
+                                                },
+                                              ),
+                                              elevation: 5,
+                                            ),
+                                          ),
+                                        );
+                                      } catch (e) {
+                                        return Container();
+                                      }
+                                    },
+                                    childCount: 13,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            height: 1000,
+                            width: 100,
+                          ),
                         ],
                       ),
                     ),
