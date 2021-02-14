@@ -1,5 +1,6 @@
 import 'Screens/home_splash_screen.dart';
 import 'services/data_services/notifiers/home_data.dart';
+import 'services/data_services/notifiers/appointment_data.dart';
 import 'Screens/login_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,6 +27,8 @@ class MyApp extends StatelessWidget {
               context.read<AuthenticationService>().authStateChanges,
         ),
         ChangeNotifierProvider<LoadHomeData>(create: (_) => LoadHomeData()),
+        ChangeNotifierProvider<LoadAppointmentData>(
+            create: (_) => LoadAppointmentData()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

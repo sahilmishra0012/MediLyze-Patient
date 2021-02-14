@@ -1,34 +1,32 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 // loads home, events, projects, team
-class LoadHomeData extends ChangeNotifier {
-  var data, appointments;
-  LoadHomeData();
+class LoadAppointmentData extends ChangeNotifier {
+  var appointments;
+  LoadAppointmentData();
   final FirebaseAuth auth = FirebaseAuth.instance;
-  CollectionReference users = FirebaseFirestore.instance.collection('patients');
   final DatabaseReference databaseRef = FirebaseDatabase().reference();
 
-  void loadHomeData() {
+  void loadAppointments() {
     try {
       final User user = auth.currentUser;
       final uid = user.uid;
-      users.doc((uid).toString()).get().then((queryResult) {
-        data = queryResult.data();
+      databaseRef.child('prescription').child(uid).onValue.listen((event) {
+        appointments = event.snapshot.value;
         notifyListeners();
-      }).catchError((err) {
-        print(err);
+      }).onError((err) {
+        print('Error Loading Home Data : ' + err.toString());
       });
     } catch (e) {
       final uid = "T2IOXmFYANXDE1f8PfpD6ArgI0m1";
-      users.doc((uid).toString()).get().then((queryResult) {
-        data = queryResult.data();
+      databaseRef.child('prescription').child(uid).onValue.listen((event) {
+        appointments = event.snapshot.value;
         notifyListeners();
-      }).catchError((err) {
-        print(err);
+      }).onError((err) {
+        print('Error Loading Home Data : ' + err.toString());
       });
     }
   }
