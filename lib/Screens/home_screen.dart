@@ -216,7 +216,7 @@ class _ProfileState extends State<Profile> {
                             child: CustomScrollView(
                               slivers: <Widget>[
                                 SliverFixedExtentList(
-                                  itemExtent: 100.0,
+                                  itemExtent: 150.0,
                                   delegate: SliverChildBuilderDelegate(
                                     (BuildContext context, int index) {
                                       try {
@@ -225,13 +225,107 @@ class _ProfileState extends State<Profile> {
                                           child: Card(
                                             child: GestureDetector(
                                               child: Container(
-                                                child: Text(Provider.of<
-                                                            LoadAppointmentData>(
-                                                        context)
-                                                    .appointments[index]
-                                                    .values
-                                                    .elementAt(
-                                                        0)[0]['prescription_id']),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .stretch,
+                                                  children: [
+                                                    SizedBox(height: 10.0),
+                                                    Container(
+                                                      padding: EdgeInsets.only(
+                                                        left: 16.0,
+                                                        right: 16.0,
+                                                      ),
+                                                      child: Text(
+                                                        "Date: " +
+                                                            Provider.of<LoadAppointmentData>(
+                                                                    context)
+                                                                .appointments[Provider.of<LoadAppointmentData>(
+                                                                            context)
+                                                                        .appointments
+                                                                        .length -
+                                                                    1 -
+                                                                    index]
+                                                                .keys
+                                                                .elementAt(0),
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 5.0),
+                                                    Container(
+                                                      padding: EdgeInsets.only(
+                                                        left: 16.0,
+                                                        right: 16.0,
+                                                      ),
+                                                      child: Text(
+                                                        "Doctor Name: " +
+                                                            Provider.of<LoadAppointmentData>(
+                                                                    context)
+                                                                .appointments[Provider.of<LoadAppointmentData>(
+                                                                            context)
+                                                                        .appointments
+                                                                        .length -
+                                                                    1 -
+                                                                    index]
+                                                                .values
+                                                                .elementAt(
+                                                                    0)[0]['doctor'],
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 5.0),
+                                                    Container(
+                                                      padding: EdgeInsets.only(
+                                                        left: 16.0,
+                                                        right: 16.0,
+                                                      ),
+                                                      child: Text(
+                                                        "Hospital Name: " +
+                                                            Provider.of<LoadAppointmentData>(
+                                                                    context)
+                                                                .appointments[Provider.of<LoadAppointmentData>(
+                                                                            context)
+                                                                        .appointments
+                                                                        .length -
+                                                                    1 -
+                                                                    index]
+                                                                .values
+                                                                .elementAt(
+                                                                    0)[0]['hospital'],
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 5.0),
+                                                    Container(
+                                                      padding: EdgeInsets.only(
+                                                        left: 16.0,
+                                                        right: 16.0,
+                                                      ),
+                                                      child: Text(
+                                                        "Diagnosed Illness: " +
+                                                            Provider.of<LoadAppointmentData>(
+                                                                    context)
+                                                                .appointments[Provider.of<LoadAppointmentData>(
+                                                                            context)
+                                                                        .appointments
+                                                                        .length -
+                                                                    1 -
+                                                                    index]
+                                                                .values
+                                                                .elementAt(
+                                                                    0)[0]['diagnosis'],
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 5.0),
+                                                  ],
+                                                ),
                                                 height: 220,
                                                 width: double.maxFinite,
                                               ),
@@ -263,16 +357,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ]),
                 )
-              :
-
-              // Center(
-              //     child: SpinKitChasingDots(
-              //       color: Colors.white,
-              //       size: 50.0,
-              //     ),
-              //   ),
-
-              Container(
+              : Container(
                   child: ListView(children: [
                     Padding(
                       padding: const EdgeInsets.only(
