@@ -5,9 +5,12 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:provider/provider.dart';
 import '../services/data_services/notifiers/home_data.dart';
 import '../services/data_services/notifiers/appointment_data.dart';
-import 'package:shimmer/shimmer.dart';
+import '../services/data_services/notifiers/otp_notification.dart';
+import '../services/data_services/modifiers/remove_otp.dart';
 
-//widgets
+import 'package:shimmer/shimmer.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 import 'package:MedilyzePatient/widgets/navbar.dart';
 import 'package:MedilyzePatient/widgets/drawer.dart';
 
@@ -17,10 +20,76 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+  void initState() {
+    super.initState();
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    initializeNotifications();
+  }
+
+  initializeNotifications() async {
+    var initializationSettingsAndroid =
+        AndroidInitializationSettings('app_icon');
+    var initializationSettingsIOS = IOSInitializationSettings();
+    var initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+    );
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: notificationSelected);
+  }
+
+  Future notificationSelected(String payload) async {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+          title: Text("OTP is still on"),
+          content: Text("Disable this OTP"),
+          actions: [
+            FlatButton(
+              child: Text("Yes"),
+              onPressed: () {
+                deleteOTP();
+                Navigator.pop(context);
+              },
+            ),
+            FlatButton(
+              child: Text("No"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ]),
+    );
+  }
+
+  Future _showNotification(String data) async {
+    var androidDetails = new AndroidNotificationDetails(
+      "Patient Application",
+      "OTP Notification",
+      "LoginOTP",
+    );
+    var iSODetails = new IOSNotificationDetails();
+    var generalNotificationDetails =
+        new NotificationDetails(android: androidDetails, iOS: iSODetails);
+
+    await flutterLocalNotificationsPlugin.show(0, "Login OTP",
+        "Your confidential Login OTP is " + data, generalNotificationDetails,
+        payload: "Task");
+  }
+
   @override
   Widget build(BuildContext context) {
     Provider.of<LoadHomeData>(context).loadHomeData();
     Provider.of<LoadAppointmentData>(context).loadAppointments();
+    Provider.of<LoadOTPData>(context).loadOTP();
+
+    if (Provider.of<LoadOTPData>(context).otp != null) {
+      print(Provider.of<LoadOTPData>(context).otp['otp']);
+      _showNotification(
+          Provider.of<LoadOTPData>(context).otp['otp'].toString());
+    }
 
     return Scaffold(
       extendBodyBehindAppBar: true,
