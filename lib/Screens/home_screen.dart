@@ -11,8 +11,9 @@ import '../services/data_services/modifiers/remove_otp.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-import 'package:MedilyzePatient/widgets/navbar.dart';
-import 'package:MedilyzePatient/widgets/drawer.dart';
+
+import '../widgets/navbar.dart';
+import '../widgets/drawer.dart';
 
 class Profile extends StatefulWidget {
   @override
