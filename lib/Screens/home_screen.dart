@@ -49,7 +49,8 @@ class _ProfileState extends State<Profile> {
           actions: [
             FlatButton(
               child: Text("Yes"),
-              onPressed: () {
+              onPressed: () async {
+                await flutterLocalNotificationsPlugin.cancel(0);
                 deleteOTP();
                 Navigator.pop(context);
               },
@@ -66,10 +67,8 @@ class _ProfileState extends State<Profile> {
 
   Future _showNotification(String data) async {
     var androidDetails = new AndroidNotificationDetails(
-      "Patient Application",
-      "OTP Notification",
-      "LoginOTP",
-    );
+        "Patient Application", "OTP Notification", "LoginOTP",
+        importance: Importance.max, priority: Priority.max);
     var iSODetails = new IOSNotificationDetails();
     var generalNotificationDetails =
         new NotificationDetails(android: androidDetails, iOS: iSODetails);
