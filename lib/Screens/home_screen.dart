@@ -11,7 +11,6 @@ import '../services/data_services/modifiers/remove_otp.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-
 import '../widgets/navbar.dart';
 import '../widgets/drawer.dart';
 
@@ -264,7 +263,7 @@ class _ProfileState extends State<Profile> {
                                   child: CircleAvatar(
                                     backgroundImage: NetworkImage(
                                         Provider.of<LoadHomeData>(context)
-                                            .data['photo']),
+                                            .data['imageUrl']),
                                     radius: 70.0,
                                     // maxRadius: 200.0,
                                   ),
@@ -307,8 +306,15 @@ class _ProfileState extends State<Profile> {
                                                         left: 16.0,
                                                         right: 16.0,
                                                       ),
-                                                      child: Text(
-                                                        "Date: " +
+                                                      child: Row(
+                                                        children: [
+                                                          Icon(
+                                                              MdiIcons.calendar,
+                                                              color: ArgonColors
+                                                                  .initial,
+                                                              size: 22.0),
+                                                          SizedBox(width: 10.0),
+                                                          Text(
                                                             Provider.of<LoadAppointmentData>(
                                                                     context)
                                                                 .appointments[Provider.of<LoadAppointmentData>(
@@ -319,8 +325,10 @@ class _ProfileState extends State<Profile> {
                                                                     index]
                                                                 .keys
                                                                 .elementAt(0),
-                                                        textAlign:
-                                                            TextAlign.left,
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                          ),
+                                                        ],
                                                       ),
                                                     ),
                                                     SizedBox(height: 5.0),
@@ -329,8 +337,14 @@ class _ProfileState extends State<Profile> {
                                                         left: 16.0,
                                                         right: 16.0,
                                                       ),
-                                                      child: Text(
-                                                        "Doctor Name: " +
+                                                      child: Row(
+                                                        children: [
+                                                          Icon(MdiIcons.doctor,
+                                                              color: ArgonColors
+                                                                  .initial,
+                                                              size: 22.0),
+                                                          SizedBox(width: 10.0),
+                                                          Text(
                                                             Provider.of<LoadAppointmentData>(
                                                                     context)
                                                                 .appointments[Provider.of<LoadAppointmentData>(
@@ -342,41 +356,64 @@ class _ProfileState extends State<Profile> {
                                                                 .values
                                                                 .elementAt(
                                                                     0)[0]['doctor'],
-                                                        textAlign:
-                                                            TextAlign.left,
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                          ),
+                                                        ],
                                                       ),
                                                     ),
+                                                    SizedBox(height: 5.0),
+                                                    Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                          left: 16.0,
+                                                          right: 16.0,
+                                                        ),
+                                                        child: Row(
+                                                          children: [
+                                                            Icon(
+                                                                MdiIcons
+                                                                    .hospitalBox,
+                                                                color:
+                                                                    ArgonColors
+                                                                        .initial,
+                                                                size: 22.0),
+                                                            SizedBox(
+                                                                width: 10.0),
+                                                            Text(
+                                                              Provider.of<LoadAppointmentData>(
+                                                                      context)
+                                                                  .appointments[
+                                                                      Provider.of<LoadAppointmentData>(context)
+                                                                              .appointments
+                                                                              .length -
+                                                                          1 -
+                                                                          index]
+                                                                  .values
+                                                                  .elementAt(
+                                                                      0)[0]['hospital'],
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left,
+                                                            ),
+                                                          ],
+                                                        )),
                                                     SizedBox(height: 5.0),
                                                     Container(
                                                       padding: EdgeInsets.only(
                                                         left: 16.0,
                                                         right: 16.0,
                                                       ),
-                                                      child: Text(
-                                                        "Hospital Name: " +
-                                                            Provider.of<LoadAppointmentData>(
-                                                                    context)
-                                                                .appointments[Provider.of<LoadAppointmentData>(
-                                                                            context)
-                                                                        .appointments
-                                                                        .length -
-                                                                    1 -
-                                                                    index]
-                                                                .values
-                                                                .elementAt(
-                                                                    0)[0]['hospital'],
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                      ),
-                                                    ),
-                                                    SizedBox(height: 5.0),
-                                                    Container(
-                                                      padding: EdgeInsets.only(
-                                                        left: 16.0,
-                                                        right: 16.0,
-                                                      ),
-                                                      child: Text(
-                                                        "Diagnosed Illness: " +
+                                                      child: Row(
+                                                        children: [
+                                                          Icon(
+                                                              MdiIcons
+                                                                  .emoticonSick,
+                                                              color: ArgonColors
+                                                                  .initial,
+                                                              size: 22.0),
+                                                          SizedBox(width: 10.0),
+                                                          Text(
                                                             Provider.of<LoadAppointmentData>(
                                                                     context)
                                                                 .appointments[Provider.of<LoadAppointmentData>(
@@ -388,8 +425,10 @@ class _ProfileState extends State<Profile> {
                                                                 .values
                                                                 .elementAt(
                                                                     0)[0]['diagnosis'],
-                                                        textAlign:
-                                                            TextAlign.left,
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                          ),
+                                                        ],
                                                       ),
                                                     ),
                                                     SizedBox(height: 5.0),
