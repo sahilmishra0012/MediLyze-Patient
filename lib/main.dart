@@ -1,8 +1,13 @@
 import 'Screens/home_splash_screen.dart';
+import 'Screens/home_screen.dart';
+
 import 'services/data_services/notifiers/home_data.dart';
 import 'services/data_services/notifiers/appointment_data.dart';
 import 'services/data_services/notifiers/otp_notification.dart';
+import 'services/data_services/notifiers/pathology_data.dart';
 import 'Screens/login_splash_screen.dart';
+import 'Screens/prescription_list_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -31,6 +36,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<LoadOTPData>(create: (_) => LoadOTPData()),
         ChangeNotifierProvider<LoadAppointmentData>(
             create: (_) => LoadAppointmentData()),
+        ChangeNotifierProvider<LoadPathologyData>(
+            create: (_) => LoadPathologyData()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -39,6 +46,10 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
+        routes: <String, WidgetBuilder>{
+          '/prescriptions': (BuildContext context) => new AppointmentHistory(),
+          '/home': (BuildContext context) => new Profile()
+        },
         home: const AuthenticationWrapper(),
       ),
     );

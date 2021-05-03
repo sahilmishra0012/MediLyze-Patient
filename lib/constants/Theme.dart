@@ -27,6 +27,8 @@ class ArgonColors {
 
   static const Color border = Color.fromRGBO(202, 209, 215, 1.0);
 
+  static const Color blue = Color.fromRGBO(0, 0, 215, 1.0);
+
   static const Color inputSuccess = Color.fromRGBO(123, 222, 177, 1.0);
 
   static const Color inputError = Color.fromRGBO(252, 179, 164, 1.0);

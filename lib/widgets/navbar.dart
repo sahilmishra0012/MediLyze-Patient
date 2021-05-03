@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import '../Screens/chat_ui_screen.dart';
 
 import '../constants/Theme.dart';
 import 'input.dart';
@@ -147,14 +148,19 @@ class _NavbarState extends State<Navbar> {
                             Navigator.pushNamed(context, '/pro');
                           },
                           child: IconButton(
-                              icon: Icon(Icons.qr_code_outlined,
-                                  color: !widget.transparent
-                                      ? (widget.bgColor == ArgonColors.white
-                                          ? ArgonColors.initial
-                                          : ArgonColors.white)
-                                      : ArgonColors.white,
-                                  size: 22.0),
-                              onPressed: null),
+                            icon: Icon(Icons.message,
+                                color: !widget.transparent
+                                    ? (widget.bgColor == ArgonColors.white
+                                        ? ArgonColors.initial
+                                        : ArgonColors.white)
+                                    : ArgonColors.white,
+                                size: 22.0),
+                            onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChatScreen()),
+                            ),
+                          ),
                         ),
                       ],
                     )

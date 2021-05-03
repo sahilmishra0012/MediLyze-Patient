@@ -14,15 +14,6 @@ class ArgonDrawer extends StatelessWidget {
 
   ArgonDrawer({this.currentPage});
 
-  _launchURL() async {
-    const url = 'https://creative-tim.com';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -58,52 +49,15 @@ class ArgonDrawer extends StatelessWidget {
                       title: "Home",
                       isSelected: currentPage == "Home" ? true : false),
                   DrawerTile(
-                      icon: Icons.pie_chart,
-                      onTap: () {
-                        if (currentPage != "Edit Profile")
-                          Navigator.pushReplacementNamed(
-                              context, '/edit_profile');
-                      },
-                      iconColor: ArgonColors.warning,
-                      title: "Edit Profile",
-                      isSelected: currentPage == "Edit Profile" ? true : false),
-                  DrawerTile(
                       icon: Icons.meeting_room,
-                      onTap: () {
-                        if (currentPage != "Appointments")
-                          Navigator.pushReplacementNamed(
-                              context, '/appointments');
-                      },
-                      iconColor: ArgonColors.info,
-                      title: "Appointments",
-                      isSelected: currentPage == "Appointments" ? true : false),
-                  DrawerTile(
-                      icon: Icons.local_hospital,
-                      onTap: () {
-                        if (currentPage != "Medications")
-                          Navigator.pushReplacementNamed(
-                              context, '/Medications');
-                      },
-                      iconColor: ArgonColors.info,
-                      title: "Medications",
-                      isSelected: currentPage == "Medications" ? true : false),
-                  DrawerTile(
-                      icon: Icons.note,
                       onTap: () {
                         if (currentPage != "Prescriptions")
                           Navigator.pushReplacementNamed(
                               context, '/prescriptions');
                       },
-                      iconColor: ArgonColors.error,
+                      iconColor: ArgonColors.info,
                       title: "Prescriptions",
-                      isSelected:
-                          currentPage == "Prescriptions" ? true : false),
-                  DrawerTile(
-                      icon: Icons.paste,
-                      onTap: () {},
-                      iconColor: ArgonColors.primary,
-                      title: "Pathology Reports",
-                      isSelected: currentPage == "Articles" ? true : false),
+                      isSelected: currentPage == "Prescriptions" ? true : false),
                 ],
               ),
             ),
